@@ -11,6 +11,7 @@ add_definitions(-DRTC_DESKTOP_DEVICE)
 
 add_library(${PLUGIN_NAME} SHARED
   "../common/cpp/src/flutter_common.cc"
+  "../common/cpp/src/flutter_custom_media_stream.cc"
   "../common/cpp/src/flutter_data_channel.cc"
   "../common/cpp/src/flutter_frame_cryptor.cc"
   "../common/cpp/src/flutter_media_stream.cc"
@@ -23,6 +24,14 @@ add_library(${PLUGIN_NAME} SHARED
   "flutter_webrtc_plugin.cc"
   "task_runner_windows.cc"
 )
+
+function(APPLY_STANDARD_SETTINGS TARGET)
+  target_compile_features(${TARGET} PUBLIC cxx_std_17)
+  target_compile_options(${TARGET} PRIVATE /W4 /WX /wd4100)
+  target_compile_options(${TARGET} PRIVATE /EHsc)
+  target_compile_definitions(${TARGET} PRIVATE "_HAS_EXCEPTIONS=0")
+  target_compile_definitions(${TARGET} PRIVATE "$<$<CONFIG:Debug>:_DEBUG>")
+endfunction()
 
 include_directories(
   "${CMAKE_CURRENT_SOURCE_DIR}"
@@ -40,7 +49,7 @@ target_include_directories(${PLUGIN_NAME} INTERFACE
   "${CMAKE_CURRENT_SOURCE_DIR}/../common/cpp/include"
   "${CMAKE_CURRENT_SOURCE_DIR}/../third_party/libwebrtc/include"
 )
-target_link_libraries(${PLUGIN_NAME} PRIVATE 
+target_link_libraries(${PLUGIN_NAME} PRIVATE
   flutter
   flutter_wrapper_plugin
   "${CMAKE_CURRENT_SOURCE_DIR}/../third_party/libwebrtc/lib/win64/libwebrtc.dll.lib"

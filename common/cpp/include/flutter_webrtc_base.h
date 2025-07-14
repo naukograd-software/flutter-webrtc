@@ -39,6 +39,7 @@ class FlutterWebRTCBase {
   friend class FlutterPeerConnectionObserver;
   friend class FlutterScreenCapture;
   friend class FlutterFrameCryptor;
+  friend class FlutterCustomMediaStream;
   enum ParseConstraintType { kMandatory, kOptional };
 
  public:

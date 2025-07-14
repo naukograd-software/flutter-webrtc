@@ -2,6 +2,7 @@
 #define PLUGINS_FLUTTER_WEBRTC_HXX
 
 #include "flutter_common.h"
+#include "flutter_custom_media_stream.h"
 
 #include "flutter_data_channel.h"
 #include "flutter_frame_cryptor.h"
@@ -31,7 +32,8 @@ class FlutterWebRTC : public FlutterWebRTCBase,
                       public FlutterPeerConnection,
                       public FlutterScreenCapture,
                       public FlutterDataChannel,
-                      public FlutterFrameCryptor {
+                      public FlutterFrameCryptor,
+                      public FlutterCustomMediaStream {
  public:
   FlutterWebRTC(FlutterWebRTCPlugin* plugin);
   virtual ~FlutterWebRTC();
