@@ -22,7 +22,7 @@ class FlutterCustomMediaStream {
       const std::string& name,
       scoped_refptr<FlutterCustomMediaStreamProvider> provider);
 
-  void GetMedia(const std::string& providerName,
+  void GetCustomMedia(const std::string& providerName,
                 const EncodableMap& constraints,
                 std::unique_ptr<MethodResultProxy> result);
 

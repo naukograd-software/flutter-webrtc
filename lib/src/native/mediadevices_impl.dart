@@ -27,6 +27,30 @@ class MediaDeviceNative extends MediaDevices {
     }
   }
 
+  Future<MediaStream> getCustomMedia(
+      String provider, Map<String, dynamic> mediaConstraints) async {
+    try {
+      final response = await WebRTC.invokeMethod(
+        'getCustomMedia',
+        <String, dynamic>{
+          'constraints': mediaConstraints,
+          'provider': provider,
+        },
+      );
+      if (response == null) {
+        throw Exception('getCustomMedia return null, something wrong');
+      }
+
+      String streamId = response['streamId'];
+      var stream = MediaStreamNative(streamId, 'local');
+      stream.setMediaTracks(
+          response['audioTracks'] ?? [], response['videoTracks'] ?? []);
+      return stream;
+    } on PlatformException catch (e) {
+      throw 'Unable to getUserMedia: ${e.message}';
+    }
+  }
+
   @override
   Future<MediaStream> getUserMedia(
       Map<String, dynamic> mediaConstraints) async {

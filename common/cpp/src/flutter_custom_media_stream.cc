@@ -20,7 +20,7 @@ void FlutterCustomMediaStream::RegisterCustomMediaStreamProvider(
   custom_media_stream_providers_.insert({name, provider});
 }
 
-void FlutterCustomMediaStream::GetMedia(
+void FlutterCustomMediaStream::GetCustomMedia(
     const std::string& providerName,
     const EncodableMap& constraints,
     std::unique_ptr<MethodResultProxy> result) {

@@ -55,6 +55,24 @@ void FlutterWebRTC::HandleMethodCall(
     const EncodableMap constraints = findMap(params, "constraints");
 
     GetDisplayMedia(constraints, std::move(result));
+  } else if (method_call.method_name().compare("getCustomMedia") == 0) {
+    if (!method_call.arguments()) {
+      result->Error("Bad Arguments", "Null constraints arguments received");
+      return;
+    }
+    const EncodableMap params =
+        GetValue<EncodableMap>(*method_call.arguments());
+
+    const std::string provider = findString(params, "provider");
+
+    if (provider.empty()) {
+      result->Error("Bad Arguments", "No provider for custom media received");
+      return;
+    }
+
+    const EncodableMap constraints = findMap(params, "constraints");
+
+    GetCustomMedia(provider, constraints, std::move(result));
   } else if (method_call.method_name().compare("getDesktopSources") == 0) {
     // types: ["screen", "window"]
     if (!method_call.arguments()) {
