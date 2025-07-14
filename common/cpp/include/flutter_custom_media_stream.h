@@ -16,9 +16,11 @@ class FlutterCustomMediaStreamProvider : public RefCountInterface {
 
 class FlutterCustomMediaStream {
  public:
+  virtual ~FlutterCustomMediaStream() = default;
+
   explicit FlutterCustomMediaStream(FlutterWebRTCBase* base) : base_(base) {}
 
-  void RegisterCustomMediaStreamProvider(
+  virtual void RegisterCustomMediaStreamProvider(
       const std::string& name,
       scoped_refptr<FlutterCustomMediaStreamProvider> provider);
 
