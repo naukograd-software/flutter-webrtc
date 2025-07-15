@@ -70,7 +70,7 @@ void FlutterWebRTC::HandleMethodCall(
       return;
     }
 
-    const EncodableMap constraints = findMap(params, "constraints");
+    EncodableMap constraints = findMap(params, "constraints");
 
     GetCustomMedia(provider, constraints, std::move(result));
   } else if (method_call.method_name().compare("getDesktopSources") == 0) {
