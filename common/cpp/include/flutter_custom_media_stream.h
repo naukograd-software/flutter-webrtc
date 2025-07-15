@@ -9,7 +9,7 @@ namespace flutter_webrtc_plugin {
 
 class FlutterCustomMediaStreamProvider : public RefCountInterface {
  public:
-  virtual void GetMedia(const EncodableMap& constraints,
+  virtual void GetMedia(EncodableMap& constraints,
                         scoped_refptr<RTCPeerConnectionFactory> factory,
                         std::unique_ptr<MethodResultProxy> result) = 0;
 };
@@ -25,7 +25,7 @@ class FlutterCustomMediaStream {
       scoped_refptr<FlutterCustomMediaStreamProvider> provider);
 
   void GetCustomMedia(const std::string& providerName,
-                      const EncodableMap& constraints,
+                      EncodableMap& constraints,
                       std::unique_ptr<MethodResultProxy> result);
 
  private:
